@@ -1,7 +1,7 @@
 import requests
 import json
 
-customerId = 'your customerId here'
+customerId = 'Pothyn'
 apiKey = '2bd4021425dbdbbb6aafac992c0ad0a8'
 
 url = 'http://api.reimaginebanking.com/customers/{}/accounts?key={}'.format(customerId,apiKey)
