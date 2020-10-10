@@ -6,7 +6,7 @@ apiKey = '2bd4021425dbdbbb6aafac992c0ad0a8'
 
 url = 'http://api.reimaginebanking.com/customers?key={}'.format(apiKey)
 
-payload = {
+customer = {
   "first_name": "Hunter",
   "last_name": "Davis",
   "address": {
@@ -18,23 +18,9 @@ payload = {
   }
 }
 
-customer = {
-  "code": 0,
-  "message": "string",
-  "fields": "string"
-}
-
-# Create a Savings Account
-response = requests.post( 
-	url, 
-	data=json.dumps(payload),
-	headers={'content-type':'application/json'},
-	)
-
-print(url)
-response = requests.post(url = url, data = payload)
+response = requests.get(url = url)
+print(response.status_code)
 print(response.text)
 
-if response.status_code == 201:
-	print('account created')
-print('confirm')
+response = requests.post(url = url, params = json.dumps(customer))
+print(response.status_code)
