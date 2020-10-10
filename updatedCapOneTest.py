@@ -22,5 +22,5 @@ response = requests.get(url = url)
 print(response.status_code)
 print(response.text)
 
-response = requests.post(url = url, params = json.dumps(customer))
+response = requests.post(url = url, data = json.dumps(customer), headers = {'content-type':'application/json'})
 print(response.status_code)
