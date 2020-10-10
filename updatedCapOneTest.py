@@ -4,9 +4,7 @@ import json
 customerId = 'Pothyn'
 apiKey = '2bd4021425dbdbbb6aafac992c0ad0a8'
 
-url = 'http://api.reimaginebanking.com/customers/{}/accounts'.format(customerId)
-# url = 'http://api.reimaginebanking.com/customers/{}/accounts?key={}'.format(customerId,apiKey)
-# url = 'http://api.reimaginebanking.com/customers?key={}'.format(apiKey)
+url = 'http://api.reimaginebanking.com/customers?key={}'.format(apiKey)
 
 payload = {
   "first_name": "Hunter",
