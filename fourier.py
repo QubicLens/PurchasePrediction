@@ -2,7 +2,6 @@ import numpy as np
 from numpy import newaxis
 from scipy.integrate import simps
 
-
 TAU = 2 * np.pi
 PI2 = np.pi / 2
 
