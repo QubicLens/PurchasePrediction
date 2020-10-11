@@ -7,8 +7,8 @@ apiKey = '2bd4021425dbdbbb6aafac992c0ad0a8'
 url = 'http://api.reimaginebanking.com/customers?key={}'.format(apiKey)
 
 customer = {
-  "first_name": "Hunter",
-  "last_name": "Davis",
+  "first_name": "Michael",
+  "last_name": "Horton",
   "address": {
     "street_number": "99",
     "street_name": "MLKJR",
@@ -19,7 +19,7 @@ customer = {
 }
 account = {
   "type": "Credit Card",
-  "nickname": "Hunter",
+  "nickname": "Who",
   "rewards": 0,
   "balance": 0,
 }
@@ -64,13 +64,15 @@ for i in range(len(purchase)):
 # for pur in range(len(p)):
 #   print(requests.post(url =f"http://api.reimaginebanking.com/accounts/{pur}/purchases?key=2bd4021425dbdbbb6aafac992c0ad0a8", data = p[pur], headers = {'content-type':'application/json'}).status_code)
 
-
 response = requests.get(url = "http://api.reimaginebanking.com/customers/5f82eb13f1bac107157e1bf1/accounts?key=2bd4021425dbdbbb6aafac992c0ad0a8")
-a = json.loads(response.text)
-print(a)
+temp = json.loads(response.text)
+print(response)
+print(temp)
 
-b = a[0]["_id"]
-print(b)
+IDVar = temp[0]["_id"]
+print(response)
+print(IDVar)
 
+# Error with merchants (merchants are strings and not merchant classes)
 for pur in range(len(p)):
-  print(requests.post(url = "http://api.reimaginebanking.com/accounts/{}/purchases?key=2bd4021425dbdbbb6aafac992c0ad0a8".format(a[0]["_id"]), data = json.dumps(p[pur]), headers = {'content-type':'application/json'}).status_code)
+  print(requests.post(url = "http://api.reimaginebanking.com/accounts/{}/purchases?key=2bd4021425dbdbbb6aafac992c0ad0a8".format(IDVar), data = json.dumps(p[pur]), headers = {'content-type':'application/json'}).status_code)
