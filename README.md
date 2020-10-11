@@ -5,7 +5,7 @@ This is for the KnightHacks Hackathon. A Heuristic Client that will analyze patt
 ## Purchase History Analysis
 
 
-**Method 1**: CAT-Fourier Analysis *
+**Method 1**: CAT-Fourier Analysis *(Selected Approach)* *
 
 > Let x(t,u) = 0,1 (with fixed constant u in [0,1]) represent whether or not a product was purchased on day t. Then, one can construct an approximate periodic representation x' of x in the CAT-sequence frequency domain. To find the CAT coefficients, solve for the coefficients yk in (4.3.3) or (4.3.6) as a system of linear equations [1].
 
