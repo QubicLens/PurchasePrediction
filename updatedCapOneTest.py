@@ -21,12 +21,16 @@ customer = {
 # Clears all prior data
 print(requests.delete(url = "http://api.reimaginebanking.com/data?type=Customer&key=2bd4021425dbdbbb6aafac992c0ad0a8").status_code)
 
+response = requests.post(url = url, data = json.dumps(customer), headers = {'content-type':'application/json'})
+print(response.status_code)
+
+print(requests.post(url = "http://api.reimaginebanking.com/customers/5f82d748f1bac107157e1beb/accounts?key=2bd4021425dbdbbb6aafac992c0ad0a8", params = json.dumps(customer), headers = {'content-type':'application/json'}).text)
+
 # response = requests.get(url = url)
 # print(response.status_code)
 # print(response.text)
 
-# response = requests.post(url = url, data = json.dumps(customer), headers = {'content-type':'application/json'})
-# print(response.status_code)
+
 
 PriceList = ("$4.86  $17.01  $16.49  $19.10  $210.83  $5.94  $6.57  $5.94  $7.98  $5.94  $15.35  $7.98  $5.94  $10.98  $5.94  $16.98  $10.00  $7.06  $7.06  $11.50  $4.86  $113.07  $5.94  $6.57  $5.94  $7.98  $5.94  $15.35  $7.98  $5.94  $10.98  $5.94  $16.98  $10.00  $11.50  $4.86  $89.63  $5.94  $6.57  $5.94  $7.98  $5.94  $15.35  $7.98  $5.94  $10.98  $5.94  $16.98  $10.00  $7.06  $7.06  $11.50  $4.86  $220.50  $5.94  $6.57  $5.94  $7.98  $5.94  $15.35  $7.98  $5.94  $10.98  $5.94  $16.98  $10.00  $11.50  $4.86  $220.50  $5.94  $6.57  $17.01  $16.49  $19.10  $4.86  $210.83  $5.94  $15.35  $7.98  $5.94  $10.98  $5.94  $16.98  $10.00  $7.06  $7.06  $11.50  $4.86  $113.07  $5.94  $6.57  $5.94  $7.98  $5.94  $15.35  $7.98  $5.94  $10.98  $5.94  $16.98  $10.00  $11.50  $4.86  $89.63  $5.94  $6.57  $5.94  $7.98  $5.94  $15.35  $7.98  $5.94  $10.98  $5.94  $16.98  $10.00  $7.06  $7.06  $11.50  $4.86  $220.50  $5.94  $6.57  $5.94  $7.98  $5.94  $15.35  $7.98  $5.94  $10.98  $5.94  $16.98  $10.00  $11.50  $4.86  $89.63  $5.94  $6.57  $5.94  $7.98  $5.94  $15.35  $7.98  $5.94  $10.98  $17.01  $16.49  $19.10  $5.94  $16.98  $10.00  $7.06  $7.06  $11.50  $4.86  $113.07  $5.94  $6.57  $5.94  $7.98  $5.94  $15.35  $7.98  $5.94  $10.98  $5.94  $16.98  $10.00  $11.50  $4.86  $89.63  $5.94  $6.57  $5.94  $7.98  $5.94  $15.35  $7.98  $5.94  $10.98  $5.94  $16.98  $10.00  $7.06  $7.06  $11.50  $4.86  $220.50  $5.94  $6.57  $5.94  $7.98  $5.94  $15.35  $7.98  $5.94  $10.98  $5.94  $16.98  $10.00  $11.50  $4.86  $89.63  $5.94  $6.57  $5.94  $7.98  $5.94  $15.35  $7.98  $5.94  $10.98  $5.94  $16.98  $10.00  $7.06  $7.06  $11.50  $4.86  $220.50").split()
 
@@ -38,10 +42,12 @@ DateList = ("11/1/20 11/1/20 11/1/20 11/1/20 11/1/20 11/2/20 11/2/20 11/3/20 11/
 # print(PlaceList)
 # print(PriceList)
 
+
 purchase = []
 for i in range(len(PriceList)):
   purchase.append([PriceList[i],PlaceList[i],DateList[i]])
 
+# List of purchases
 p = []
 for i in range(len(purchase)):
   p.append({
@@ -52,3 +58,12 @@ for i in range(len(purchase)):
   "status": "pending",
   "description": "string"
 })
+
+# API Call to post on webpage
+# for pur in range(len(p)):
+#   print(requests.post(url =f"http://api.reimaginebanking.com/accounts/{pur}/purchases?key=2bd4021425dbdbbb6aafac992c0ad0a8", data = p[pur], headers = {'content-type':'application/json'}).status_code)
+
+
+# Error: {"code":404,"message":"This id does not exist in accounts"} 
+for pur in range(len(p)):
+  print(requests.post(url = "http://api.reimaginebanking.com/accounts/5f82081ef1bac107157e1bdd/purchases?key=2bd4021425dbdbbb6aafac992c0ad0a8", data = p[pur], headers = {'content-type':'application/json'}).status_code)
