@@ -8,10 +8,6 @@ CATEGORIES = ["Subscriptions", "Food", "Coffee", "Entertainment"]
 # ---- Purchase History Analyzer -----
 
 
-def magnitude(z):
-    return np.abs(z) * np.abs(z)
-
-
 class Oracle(object):
     def __init__(self, products):
         self._obj = products
@@ -19,6 +15,7 @@ class Oracle(object):
 
         # Construct purchasing behavior models for each product
         for k, v in self.objs.items():
+            # Format: (category code, purchase history, avg_price)
             self.objs[k] = (v[0], analyze(interpolate(v[2]), 20, 9999), v[3][1])
 
     def project_category(self, interval):
@@ -43,6 +40,7 @@ class Oracle(object):
         cats = [(0, 0), (0, 0), (0, 0), (0, 0)]
 
         # Find dominant freq in category from dominant freq of each product
+        # May be very inaccurate (see `frequent_location` function)
         for k, c, y in self.frequent_location():
             cats[c - 1] = y if cats[c - 1][1] < y[1] else cats[c - 1]
 
@@ -50,6 +48,8 @@ class Oracle(object):
 
     def frequent_location(self):
         # Find dominant freq at each store
+        # May be very inaccurate since calculating the strength of each freq
+        #    (CAT Coeff) suffers from high numerical imprecision
         for k, v in self._obj.items():
             Yk = np.delete(
                 np.real(cat_coeff(interpolate(v[2]), np.arange(-20, 20 + 1), 9999)), 20
