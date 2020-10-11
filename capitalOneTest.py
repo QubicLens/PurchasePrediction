@@ -57,7 +57,7 @@ for i in range(len(purchase)):
   "purchase_date": purchase[i][2],
   "amount": 1,
   "status": "pending",
-  "description": CategoryList[i][3]
+  "description": purchase[i][3]
 })
 
 # API Call to post on webpage
@@ -69,8 +69,8 @@ response = requests.get(url = "http://api.reimaginebanking.com/customers/5f82eb1
 a = json.loads(response.text)
 print(a)
 
-print(a[0]["_id"])
+b = a[0]["_id"]
+print(b)
 
-# Error: {"code":404,"message":"This id does not exist in accounts"} 
 for pur in range(len(p)):
-  (requests.post(url = "http://api.reimaginebanking.com/accounts/5f82081ef1bac107157e1bdd/purchases?key=2bd4021425dbdbbb6aafac992c0ad0a8", data = p[pur], headers = {'content-type':'application/json'}).status_code)
+  print(requests.post(url = "http://api.reimaginebanking.com/accounts/{}/purchases?key=2bd4021425dbdbbb6aafac992c0ad0a8".format(a[0]["_id"]), data = json.dumps(p[pur]), headers = {'content-type':'application/json'}).status_code)
